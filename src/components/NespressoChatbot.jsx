@@ -27,7 +27,8 @@ class NespressoChatbot extends Component {
     handleNewUserMessage = (searchQuery) => {
     this.getResponseFromSearchQuery(searchQuery);
     const {domain,keyword}=this.state;
-    if(domain==='None') addResponseMessage("Which domain do you searching for ?")
+    if(domain.includes("None")) addResponseMessage("Which domain do you searching for ?")
+    else if(keyword.includes("None")) addResponseMessage("Wich "+domain+" do you exactly looking for ?");
     else addResponseMessage("domain : "+domain+", keyword :"+keyword);
     }
     
