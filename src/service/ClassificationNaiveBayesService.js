@@ -9,4 +9,20 @@ function getResponseFromSearchQuery(searchQuery,callback){
              console.log(err);
          }); 
 }
-export {getResponseFromSearchQuery};
+function writeDomainIfDoesntExist(NoExistDomainRequest,callback){
+    axios.post(API_BASE_URL+"/write/domain",NoExistDomainRequest)
+         .then(res=>{
+             callback(res.data);
+         }).catch(err=>{
+             console.log(err);
+         });
+}
+function writeKeywordIfDoesntExist(NoExistKeywordRequest,callback){
+    axios.post(API_BASE_URL+"/write/keyword",NoExistKeywordRequest)
+    .then(res=>{
+        callback(res.data);
+    }).catch(err=>{
+        console.log(err);
+    });
+}
+export {getResponseFromSearchQuery,writeDomainIfDoesntExist,writeKeywordIfDoesntExist};
