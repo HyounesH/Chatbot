@@ -24,28 +24,23 @@ class NespressoChatbot extends Component {
       this.setState({ domain: data.domain, keyword: data.keyword });
     });
   }
-  componentDidUpdate() {}
 
   handleNewUserMessage = searchQuery => {
     this.getResponseFromSearchQuery(searchQuery);
-    const { domain, keyword } = this.state;
-    if (domain == "" || keyword == "") {
-      this.getResponseFromSearchQuery(searchQuery);
-      this.HandleUserSearchInput(domain, keyword);
-    } else this.HandleUserSearchInput(domain, keyword);
   };
-  HandleUserSearchInput = (domain, keyword) => {
+  addMessage = (domain, keyword) => {
     if (domain.includes("None")) {
-      this.setState({domainExist:false});
+      this.setState({ domainExist: false });
       addResponseMessage("Which domain do you searching for ?");
-    } else if (keyword.includes("None")){
-      this.setState({keywordExist:false});
+    } else if (keyword.includes("None")) {
+      this.setState({ keywordExist: false });
       addResponseMessage("Wich " + domain + " do you exactly looking for ?");
-    }
-    else addResponseMessage("domain : " + domain + ", keyword :" + keyword);
+    } else addResponseMessage("domain : " + domain + ", keyword :" + keyword);
   };
 
   render() {
+    const { domain, keyword } = this.state;
+    if (domain !== "" && keyword !== "") this.addMessage(domain, keyword);
     return <Widget handleNewUserMessage={this.handleNewUserMessage} />;
   }
 }
